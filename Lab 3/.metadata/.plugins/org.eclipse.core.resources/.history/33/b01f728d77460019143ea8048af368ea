@@ -1,0 +1,26 @@
+package rf;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		double[][] learningSet;
+		try {
+			learningSet = FileUtils.readLearningSetFromFile("in.txt");
+			int numberOfPatterns = learningSet.length;
+			int numberOfFeatures = learningSet[0].length;
+
+			for (int form = 1; form < learningSet.length; form++) {
+				double euclidianDistance = DistanceUtils.EuclidianDistance(learningSet[0], learningSet[1]);
+				System.out.println("Euclidian Distance between form 0 and form " + form + "is" + euclidianDistance);
+			}
+
+			System.out.println(String.format("The learning set has %s patters and %s features", numberOfPatterns,
+					numberOfFeatures));
+		} catch (USVInputFileCustomException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			System.out.println("Finished learning set operations");
+		}
+	}
+
+}

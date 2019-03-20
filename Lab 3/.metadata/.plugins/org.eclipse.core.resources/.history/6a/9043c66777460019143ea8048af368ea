@@ -1,0 +1,22 @@
+package rf;
+
+public class DistanceUtils {
+
+	public static int EuclidianDistance(double[] pattern1, double[] pattern2) {
+		for (int elem = 0; elem < pattern1.length; elem++) {
+
+		}
+	}
+
+	public static int MahalanobisDistance(double[] pattern1, double[] pattern2, int patternCount) {
+		return 0;
+	}
+
+	public static int CebisevDistance(double[] pattern1, double[] pattern2) {
+		return 0;
+	}
+
+	public static int CityBlock(double[] pattern1, double[] pattern2) {
+		return 0;
+	}
+}

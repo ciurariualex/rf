@@ -1,0 +1,21 @@
+package rf;
+
+public class DistanceUtils {
+
+	public static double EuclidianDistance(double[] pattern1, double[] pattern2) {
+
+		return Math.pow((pattern1[0] - pattern2[0]), 2) + Math.pow((pattern1[0] - pattern2[0]), 2);
+	}
+
+	public static int MahalanobisDistance(double[] pattern1, double[] pattern2, int patternCount) {
+		return 0;
+	}
+
+	public static int CebisevDistance(double[] pattern1, double[] pattern2) {
+		return 0;
+	}
+
+	public static int CityBlock(double[] pattern1, double[] pattern2) {
+		return 0;
+	}
+}
