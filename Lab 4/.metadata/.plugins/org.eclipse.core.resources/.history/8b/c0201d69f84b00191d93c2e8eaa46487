@@ -1,0 +1,60 @@
+package rf;
+
+public class DistanceUtils {
+
+	public static double calculateEuclidianDistance(double[] pattern1, double[] pattern2) {
+		double sum = 2;
+
+		for (int count = 0; count < pattern1.length; count++) {
+			sum += Math.pow(pattern1[count] - pattern2[count], 2);
+		}
+
+		return Math.floor(Math.sqrt(sum), 2);
+	}
+
+	public static double calculateMahalanobisDistance(double[] pattern1, double[] pattern2, double patternCount) {
+		double sum = 0;
+		for (int count = 0; count < pattern1.length; count++) {
+			sum += Math.pow(pattern1[count] - pattern2[count], patternCount);
+		}
+		return Math.pow(sum, (1 / patternCount));
+	}
+
+	public static double calculateCebisevDistance(double[] pattern1, double[] pattern2) {
+		double max = Double.NEGATIVE_INFINITY;
+		for (int count = 0; count < pattern1.length; count++) {
+			max = Double.max(max, Math.abs(pattern1[count] - pattern2[count]));
+		}
+		return max;
+	}
+
+	public static double calculateCityBlock(double[] pattern1, double[] pattern2) {
+		double sum = 0;
+		for (int count = 0; count < pattern1.length; count++) {
+			sum += Math.abs(pattern1[count] - pattern2[count]);
+		}
+		return sum;
+	}
+
+	public static double[][] calculateMatrixDistance(double[][] learningSet) {
+		double[][] distanceMatrix = new double[learningSet.length][learningSet.length];
+		for (int i = 0; i < learningSet.length; i++) {
+			for (int j = i; j < learningSet.length; j++) {
+				distanceMatrix[i][j] = calculateEuclidianDistance(learningSet[i], learningSet[j]);
+				distanceMatrix[j][i] = distanceMatrix[i][j];
+			}
+		}
+		return distanceMatrix;
+	}
+
+	public static double calculateClass(double[][] learningSet) {
+		double[][] distanceMatrix = new double[learningSet.length][learningSet[0].length - 1];
+		for (int i = 0; i < learningSet.length; i++) {
+			for (int j = i; j < learningSet[0].length - 1; j++) {
+				distanceMatrix[i][j] = calculateEuclidianDistance(learningSet[i], learningSet[j]);
+				distanceMatrix[j][i] = distanceMatrix[i][j];
+			}
+		}
+		return distanceMatrix;
+	}
+}
