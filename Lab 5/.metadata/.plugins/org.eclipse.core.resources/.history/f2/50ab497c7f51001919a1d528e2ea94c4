@@ -1,0 +1,10 @@
+package rf;
+
+import java.util.ArrayList;
+
+public class Utils {
+
+	public static double calculateEuclidianDistance(ArrayList<DistanceForm> distanceForms) {
+		return Math.sqrt(Math.pow((form1.x - form2.x), 2) + Math.pow((form1.y - form2.y), 2));
+	}
+}

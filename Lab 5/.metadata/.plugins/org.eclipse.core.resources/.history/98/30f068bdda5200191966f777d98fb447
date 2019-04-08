@@ -1,0 +1,25 @@
+package rf;
+
+import java.util.Comparator;
+
+public class DistanceForm implements Comparable<DistanceForm> {
+	public Form form1;
+	public Form form2;
+	public double distance;
+	public String classForm1;
+
+	public DistanceForm(Form form1, Form form2, double distance) {
+		this.form1 = form1;
+		this.form2 = form2;
+		this.distance = distance;
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	@Override
+	public int compareTo(DistanceForm o) {
+		return Comparator.comparing(DistanceForm::getDistance).compare(this, o);
+	}
+}

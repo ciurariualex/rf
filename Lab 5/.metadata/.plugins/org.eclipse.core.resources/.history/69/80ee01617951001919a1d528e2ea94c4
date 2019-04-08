@@ -1,0 +1,7 @@
+package rf;
+
+public class Form {
+	public String Class;
+	public double x;
+	public double y;
+}

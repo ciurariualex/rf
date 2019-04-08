@@ -1,0 +1,13 @@
+package rf;
+
+import java.util.ArrayList;
+
+public class Utils {
+
+	public static double calculateEuclidianDistance(ArrayList<DistanceForm> distanceForms) {
+		double ArrayList<DistanceForm> minDistanceForms = new ArrayList<DistanceForm>();
+		for (int i = 0; i < distanceForms.size(); i++) {
+
+		}
+	}
+}

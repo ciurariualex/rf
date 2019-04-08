@@ -1,0 +1,47 @@
+package rf;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+
+	public static void main(String[] args) {
+		String[][] learningSet;
+		try {
+			learningSet = FileUtils.readLearningSetFromFile("in.csv");
+
+			ArrayList<Form> listToBeCalculatedClass = new ArrayList<Form>();
+			listToBeCalculatedClass.add(new Form(25.89, 47.56, ""));
+			listToBeCalculatedClass.add(new Form(24, 45.15, ""));
+			listToBeCalculatedClass.add(new Form(25.33, 45.44, ""));
+
+			ArrayList<Form> list = new ArrayList<Form>();
+			for (int i = 1; i < learningSet.length; i++) {
+				list.add(new Form(Double.parseDouble(learningSet[i][0]), Double.parseDouble(learningSet[i][1]),
+						learningSet[i][3]));
+			}
+
+			int k = 90;
+
+			ArrayList<ArrayList<DistanceForm>> arrayOfDistancesList = new ArrayList<ArrayList<DistanceForm>>();
+			for (int i = 0; i < listToBeCalculatedClass.size(); i++) {
+				arrayOfDistancesList.add(DistanceUtils.calculateArrayOfDistance(listToBeCalculatedClass.get(i), list));
+				Collections.sort(arrayOfDistancesList.get(i));
+				listToBeCalculatedClass.get(i).Class = DistanceUtils.calculateClass(arrayOfDistancesList.get(i), k);
+			}
+
+			for (int i = 0; i < listToBeCalculatedClass.size(); i++) {
+				System.out
+						.println("Form1 calculated class with k=" + k + " is: " + listToBeCalculatedClass.get(i).Class);
+			}
+
+		} catch (USVInputFileCustomException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			System.out.println("Finished learning set operations");
+		}
+	}
+
+}

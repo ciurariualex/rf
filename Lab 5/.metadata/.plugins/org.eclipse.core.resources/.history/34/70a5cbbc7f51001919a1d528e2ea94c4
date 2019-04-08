@@ -1,0 +1,17 @@
+package rf;
+
+import java.util.ArrayList;
+
+public class Utils {
+
+	public static ArrayList<DistanceForm> calculateEuclidianDistance(ArrayList<DistanceForm> distanceForms) {
+		ArrayList<DistanceForm> minDistanceForms = new ArrayList<DistanceForm>();
+
+		double min = Double.MAX_VALUE;
+		for (int i = 0; i < distanceForms.size(); i++) {
+
+		}
+
+		return minDistanceForms;
+	}
+}

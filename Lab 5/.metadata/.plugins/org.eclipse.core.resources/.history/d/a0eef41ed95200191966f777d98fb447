@@ -1,0 +1,29 @@
+package rf;
+
+public class DistanceForm {
+	public Form form1;
+	public Form form2;
+	public double distance;
+	
+	public DistanceForm(Form form1, Form form2, double distance) {
+		this.form1 = form1;
+		this.form2 = form2;
+		this.distance = distance;
+	}
+	
+	public double getDistance() {
+	    return distance;
+	  }
+	  
+	  public void setDistance(double distance) {
+	    this.distance = distance;
+	  }
+	  
+	@Override
+	  public double compareTo(DistanceForm d) {
+	    if (getDistance() == null || d.getDistance() == null) {
+	      return 0.0;
+	    }
+	    return getDistance().compareTo(d.getDistance());
+	  }
+}

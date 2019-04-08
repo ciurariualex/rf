@@ -1,0 +1,28 @@
+package rf;
+
+public class DistanceForm implements Comparable<DistanceForm> {
+	public Form form1;
+	public Form form2;
+	public double distance;
+
+	public DistanceForm(Form form1, Form form2, double distance) {
+		this.form1 = form1;
+		this.form2 = form2;
+		this.distance = distance;
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	@Override
+	public double compare(DistanceForm d1, DistanceForm d2) {
+		return Double.min(d1.getDistance(), d2.getDistance());
+	}
+
+	@Override
+	public double compareTo(DistanceForm d1) {
+		return getDistance().compareTo(d1.getDistance());
+
+	}
+}

@@ -1,0 +1,54 @@
+package rf;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+
+	public static void main(String[] args) {
+		String[][] learningSet;
+		try {
+			learningSet = FileUtils.readLearningSetFromFile("in.csv");
+
+			Form f1 = new Form(25.89, 47.56, "");
+			Form f2 = new Form(24, 45.15, "");
+			Form f3 = new Form(25.33, 45.44, "");
+
+			ArrayList<Form> list = new ArrayList<Form>();
+			for (int i = 1; i < learningSet.length; i++) {
+				list.add(new Form(Double.parseDouble(learningSet[i][0]), Double.parseDouble(learningSet[i][1]),
+						learningSet[i][3]));
+			}
+
+			ArrayList<DistanceForm> arrayOfDistanceF1 = DistanceUtils.calculateArrayOfDistance(f1, list);
+			ArrayList<DistanceForm> arrayOfDistanceF2 = DistanceUtils.calculateArrayOfDistance(f2, list);
+			ArrayList<DistanceForm> arrayOfDistanceF3 = DistanceUtils.calculateArrayOfDistance(f3, list);
+
+			Collections.sort(arrayOfDistanceF1);
+			Collections.sort(arrayOfDistanceF2);
+			Collections.sort(arrayOfDistanceF3);
+			
+			int k = 9;
+
+			Map<String, Integer> counterMap = new HashMap<String, Integer>();
+			for (int j = 0; j < k; j++) {
+				if (counterMap.containsKey(arrayOfDistanceF1.get(j).classForm1)) {
+					int count = counterMap.get(arrayOfDistanceF1.get(j).classForm1);
+					counterMap.put((arrayOfDistanceF1.get(j).classForm1), ++count);
+				} else {
+					counterMap.put((arrayOfDistanceF1.get(j).classForm1), 1);
+				}
+			}
+
+			System.out.println("asd");
+
+		} catch (USVInputFileCustomException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			System.out.println("Finished learning set operations");
+		}
+	}
+
+}

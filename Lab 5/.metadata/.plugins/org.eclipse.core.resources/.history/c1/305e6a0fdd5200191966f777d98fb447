@@ -1,0 +1,55 @@
+package rf;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+
+	public static void main(String[] args) {
+		String[][] learningSet;
+		try {
+			learningSet = FileUtils.readLearningSetFromFile("in.csv");
+
+			ArrayList<Form> listToBeCalculatedClass = new ArrayList<Form>();
+			listToBeCalculatedClass.add(new Form(25.89, 47.56, ""));
+			listToBeCalculatedClass.add(new Form(24, 45.15, ""));
+			listToBeCalculatedClass.add(new Form(25.33, 45.44, ""));
+
+			ArrayList<Form> list = new ArrayList<Form>();
+			for (int i = 1; i < learningSet.length; i++) {
+				list.add(new Form(Double.parseDouble(learningSet[i][0]), Double.parseDouble(learningSet[i][1]),
+						learningSet[i][3]));
+			}
+
+			ArrayList<ArrayList<DistanceForm>> arrayOfDistancesList = new ArrayList<ArrayList<DistanceForm>>();
+			for (int i = 0; i < listToBeCalculatedClass.size(); i++) {
+				arrayOfDistancesList.add(DistanceUtils.calculateArrayOfDistance(listToBeCalculatedClass.get(i), list));
+			}
+
+			ArrayList<DistanceForm> arrayOfDistanceF1 = DistanceUtils.calculateArrayOfDistance(f1, list);
+			ArrayList<DistanceForm> arrayOfDistanceF2 = DistanceUtils.calculateArrayOfDistance(f2, list);
+			ArrayList<DistanceForm> arrayOfDistanceF3 = DistanceUtils.calculateArrayOfDistance(f3, list);
+
+			Collections.sort(arrayOfDistanceF1);
+			Collections.sort(arrayOfDistanceF2);
+			Collections.sort(arrayOfDistanceF3);
+
+			int k = 9;
+
+			String calculatedClass1 = DistanceUtils.calculateClass(arrayOfDistanceF1, k);
+			String calculatedClass2 = DistanceUtils.calculateClass(arrayOfDistanceF2, k);
+			String calculatedClass3 = DistanceUtils.calculateClass(arrayOfDistanceF3, k);
+
+			System.out.println("Form1 class: " + calculatedClass1 + "\nForm2 class: " + calculatedClass2
+					+ "\nForm3class: " + calculatedClass3);
+
+		} catch (USVInputFileCustomException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			System.out.println("Finished learning set operations");
+		}
+	}
+
+}

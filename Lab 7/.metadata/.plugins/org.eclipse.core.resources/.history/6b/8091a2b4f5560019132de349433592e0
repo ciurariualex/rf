@@ -1,0 +1,41 @@
+package rf;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+
+	public static void main(String[] args) {
+		String[][] learningSet;
+		try {
+			learningSet = FileUtils.readLearningSetFromFile("in.txt");
+
+			ArrayList<Form> listToBeCalculatedClass = new ArrayList<Form>();
+			listToBeCalculatedClass.add(new Form(4, 5, ""));
+
+			ArrayList<Form> list = new ArrayList<Form>();
+			for (int i = 1; i < learningSet.length; i++) {
+				list.add(new Form(Double.parseDouble(learningSet[i][0]), Double.parseDouble(learningSet[i][1]),
+						learningSet[i][2]));
+			}
+
+			ArrayList<ArrayList<Form>> coupledList = new ArrayList<ArrayList<Form>>();
+
+			for (int i = 0; i < list.size(); i++) {
+
+			}
+			for (int i = 0; i < listToBeCalculatedClass.size(); i++) {
+				System.out
+						.println("Form1 calculated class with k=" + k + " is: " + listToBeCalculatedClass.get(i).Class);
+			}
+
+		} catch (USVInputFileCustomException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			System.out.println("Finished learning set operations");
+		}
+	}
+
+}

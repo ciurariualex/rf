@@ -1,0 +1,11 @@
+package rf;
+
+public class DistanceForm {
+	public Form form;
+	public double distance;
+	
+	public DistanceForm(Form form, double distance) {
+		this.form = form;
+		this.distance = distance;
+	}
+}

@@ -1,0 +1,38 @@
+package rf;
+
+import java.util.ArrayList;
+
+public class Main {
+
+	public static void main(String[] args) {
+		String[][] learningSet;
+		try {
+			learningSet = FileUtils.readLearningSetFromFile("in.csv");
+
+			Form f1 = new Form(25.89, 47.56, "");
+			Form f2 = new Form(24, 45.15, "");
+			Form f3 = new Form(25.33, 45.44, "");
+
+			ArrayList<Form> list = new ArrayList<Form>();
+			for (int i = 1; i < learningSet.length; i++) {
+				for (int j = 0; j < learningSet[0].length; j++) {
+					String x = learningSet[i][j];
+					String[] formValues = x.split(",");
+					list.add(new Form(Double.parseDouble(formValues[0]), Double.parseDouble(formValues[1]),
+							formValues[3]));
+				}
+			}
+
+			double[] arrayOfDistanceF1 = DistanceUtils.calculateArrayOfDistance(f1, list);
+			double[] arrayOfDistanceF2 = DistanceUtils.calculateArrayOfDistance(f2, list);
+			double[] arrayOfDistanceF3 = DistanceUtils.calculateArrayOfDistance(f3, list);
+			System.out.println("asd");
+
+		} catch (USVInputFileCustomException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			System.out.println("Finished learning set operations");
+		}
+	}
+
+}

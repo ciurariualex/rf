@@ -1,0 +1,67 @@
+package rf;
+
+import java.util.ArrayList;
+
+public class DistanceUtils {
+
+	public static double calculateEuclidianDistance(double[] pattern1, double[] pattern2) {
+		double sum = 0;
+
+		for (int count = 0; count < pattern1.length - 1; count++) {
+			sum += Math.pow(pattern1[count] - pattern2[count], 2);
+		}
+
+		return Math.floor(Math.sqrt(sum) * 100) / 100;
+	}
+
+	public static double calculateMahalanobisDistance(double[] pattern1, double[] pattern2, double patternCount) {
+		double sum = 0;
+		for (int count = 0; count < pattern1.length; count++) {
+			sum += Math.pow(pattern1[count] - pattern2[count], patternCount);
+		}
+		return Math.pow(sum, (1 / patternCount));
+	}
+
+	public static double calculateCebisevDistance(double[] pattern1, double[] pattern2) {
+		double max = Double.NEGATIVE_INFINITY;
+		for (int count = 0; count < pattern1.length; count++) {
+			max = Double.max(max, Math.abs(pattern1[count] - pattern2[count]));
+		}
+		return max;
+	}
+
+	public static double calculateCityBlock(double[] pattern1, double[] pattern2) {
+		double sum = 0;
+		for (int count = 0; count < pattern1.length; count++) {
+			sum += Math.abs(pattern1[count] - pattern2[count]);
+		}
+		return sum;
+	}
+
+	public static double[][] calculateMatrixDistance(Form currentForm, ArrayList<Form>[] forms) {
+		double[][] distanceMatrix = new double[learningSet.length][learningSet.length];
+		for (int i = 0; i < learningSet.length; i++) {
+			for (int j = i; j < learningSet.length; j++) {
+				distanceMatrix[i][j] = calculateEuclidianDistance(learningSet[i], learningSet[j]);
+				distanceMatrix[j][i] = distanceMatrix[i][j];
+			}
+		}
+		return distanceMatrix;
+	}
+
+	public static double calculateClass(int formNumber, double[][] learningSet, double[] pattern, double[] distances) {
+		double min = Double.MAX_VALUE;
+		double calculatedClass = Double.NEGATIVE_INFINITY;
+		int classIndex = 0;
+		for (int j = 0; j < distances.length; j++) {
+			if (formNumber != j && min > distances[j]) {
+				min = distances[j];
+				classIndex = j;
+			}
+		}
+		calculatedClass = learningSet[classIndex][learningSet[classIndex].length - 1];
+
+		System.out.println("Min: " + min);
+		return calculatedClass;
+	}
+}
