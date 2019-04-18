@@ -1,0 +1,62 @@
+package rf;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class DistanceUtils {
+
+	public static double calculateEuclidianDistance(Form form1, Form form2) {
+		return Math.sqrt(Math.pow((form1.x - form2.x), 2) + Math.pow((form1.y - form2.y), 2));
+	}
+
+	public static double calculateMahalanobisDistance(double[] pattern1, double[] pattern2, double patternCount) {
+		double sum = 0;
+		for (int count = 0; count < pattern1.length; count++) {
+			sum += Math.pow(pattern1[count] - pattern2[count], patternCount);
+		}
+		return Math.pow(sum, (1 / patternCount));
+	}
+
+	public static double calculateCebisevDistance(double[] pattern1, double[] pattern2) {
+		double max = Double.NEGATIVE_INFINITY;
+		for (int count = 0; count < pattern1.length; count++) {
+			max = Double.max(max, Math.abs(pattern1[count] - pattern2[count]));
+		}
+		return max;
+	}
+
+	public static double calculateCityBlock(double[] pattern1, double[] pattern2) {
+		double sum = 0;
+		for (int count = 0; count < pattern1.length; count++) {
+			sum += Math.abs(pattern1[count] - pattern2[count]);
+		}
+		return sum;
+	}
+
+	public static ArrayList<DistanceForm> calculateArrayOfDistance(Form currentForm, ArrayList<Form> forms) {
+		ArrayList<DistanceForm> arrayOfDistance = new ArrayList<DistanceForm>();
+
+		for (int i = 0; i < forms.size(); i++) {
+			arrayOfDistance.add(
+					new DistanceForm(currentForm, forms.get(i), calculateEuclidianDistance(currentForm, forms.get(i))));
+		}
+		return arrayOfDistance;
+	}
+
+	public static String calculateClass(ArrayList<DistanceForm> arrayOfDistanceF1, int k) {
+		Map<String, Integer> counterMap = new HashMap<String, Integer>();
+		for (int j = 0; j < k; j++) {
+			if (counterMap.containsKey(arrayOfDistanceF1.get(j).classForm2)) {
+				int count = counterMap.get(arrayOfDistanceF1.get(j).classForm2);
+				counterMap.put((arrayOfDistanceF1.get(j).classForm2), ++count);
+			} else {
+				counterMap.put((arrayOfDistanceF1.get(j).classForm2), 1);
+			}
+		}
+		
+		String calculatedClass = counterMap.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
+
+		return calculatedClass;
+	}
+}

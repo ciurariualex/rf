@@ -1,0 +1,35 @@
+package rf;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+
+		try {
+			String[][] learningSet = FileUtils.readLearningSetFromFile("in.txt");
+			double[][] entrySet = new double[learningSet.length][learningSet[0].length];
+			for (int i =0 ;i<learningSet.length; i++)
+			{
+				for (int j =0 ;j<learningSet[0].length; j++)
+				{
+					entrySet[i][j] = Double.valueOf(learningSet[i][j]);
+				}
+			}
+			int[] clazzez = ClassificationUtils.classifySet(entrySet, 2, 2);
+			for (int i=0;i<clazzez.length; i++)
+			{
+				System.out.println(clazzez[i]);
+			}
+			
+		} catch (Exception ex) {
+
+		}
+	}
+
+}
